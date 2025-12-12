@@ -1,0 +1,431 @@
+/* --- 1. Variabel dan Reset Dasar (TIDAK BERUBAH) --- */
+:root {
+    --primary-color: #1a1a1a;        
+    --accent-color: #FF69B4;         
+    --text-color: #333;
+    --font-stack: 'Poppins', sans-serif;
+    --transition-fast: 0.3s ease;
+    --transition-medium: 0.5s ease;
+    --glow-color: rgba(255, 105, 180, 0.8); 
+    --soft-pink-start: #fff0f5;       
+    --off-white-bg: #fffafa;         
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%; 
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-stack);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #fff;
+    font-size: 1.6rem;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent-color);
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+/* --- 2. Header dan Navigasi (TIDAK BERUBAH) --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+    background-image: linear-gradient(to right, var(--soft-pink-start) 0%, rgba(255, 255, 255, 0.95) 100%);
+    backdrop-filter: blur(4px); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav a {
+    margin-left: 2.5rem;
+    font-weight: 600;
+    position: relative;
+    color: var(--text-color);
+}
+
+.nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: var(--accent-color);
+    transition: width var(--transition-fast);
+    transform: translateX(-50%);
+}
+
+.nav a:hover::after {
+    width: 100%;
+}
+
+/* --- 3. Gaya Umum Bagian, Tombol & Glow Effect (TIDAK BERUBAH) --- */
+.section {
+    padding: 10rem 5%;
+    min-height: 80vh;
+}
+
+.section-title {
+    font-size: 4rem; 
+    font-weight: 700;
+    margin-bottom: 6rem;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background-color: var(--accent-color); 
+    color: white;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.glow-button {
+    box-shadow: 0 0 10px var(--glow-color); 
+}
+
+.cta-button:hover {
+    background-color: #e65a9e;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--glow-color), 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- 4. Home Section (TIDAK BERUBAH) --- */
+#home {
+    background: linear-gradient(135deg, var(--soft-pink-start) 0%, #ffffff 100%); 
+}
+
+.home-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.text-area {
+    flex: 1;
+    max-width: 550px; 
+}
+
+.intro-description {
+    font-size: 1.8rem;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 3rem;
+}
+
+.photo-area {
+    flex: 0 0 300px;
+    text-align: center;
+    padding: 2rem;
+}
+
+.profile-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 5px solid var(--accent-color);
+    transition: all var(--transition-medium); 
+}
+
+.glow-border {
+    box-shadow: 
+        0 0 10px var(--glow-color),
+        0 0 20px var(--glow-color) inset;
+}
+
+.animated-photo:hover {
+    transform: scale(1.05) rotate(1deg); 
+    box-shadow: 
+        0 0 15px var(--glow-color),
+        0 0 30px var(--glow-color) inset;
+}
+
+.welcome-message, .intro-description, #home .cta-button {
+    opacity: 0;
+    animation: fadeInSlideUp 1s ease-out forwards;
+}
+.welcome-message { animation-delay: 0.3s; }
+.intro-description { animation-delay: 0.5s; }
+#home .cta-button { animation-delay: 0.7s; }
+
+
+/* --- 5. About Section (REVISI: Dua Kolom + Foto Animasi) --- */
+#about {
+    background: var(--off-white-bg);
+    text-align: center;
+}
+
+.about-content-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.about-photo-wrapper {
+    flex: 0 0 300px; /* Lebar foto di kolom kiri */
+    text-align: center;
+}
+
+.about-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Bentuk Kotak/Persegi Panjang */
+    object-fit: cover;
+    border: 4px solid var(--accent-color);
+    transition: all var(--transition-medium); 
+}
+
+/* Animasi Foto About (BARU) */
+.animated-about-photo:hover {
+    transform: scale(1.05) rotate(-1deg); /* Scale ringan dan rotasi negatif */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2), 0 0 15px var(--glow-color); /* Glow ringan */
+}
+
+.bio-text {
+    flex: 1;
+    max-width: 600px;
+    font-size: 1.8rem;
+    line-height: 1.6;
+}
+
+
+/* --- 6. Skills Section (REVISI: Hanya HTML & CSS, 2 Kolom) --- */
+#skills {
+    background: linear-gradient(180deg, var(--soft-pink-start) 0%, #ffffff 100%);
+}
+
+.skills-grid-2col { /* Nama kelas diubah untuk membedakan */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* HANYA 2 KOLOM */
+    gap: 3rem;
+    max-width: 500px; /* Batasi lebar agar dua ikon terlihat di tengah */
+    margin: 0 auto;
+}
+
+.skill-icon-card {
+    background-color: white;
+    padding: 3rem 1rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-medium);
+    transform-style: preserve-3d;
+}
+
+.skill-icon-card i {
+    font-size: 5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    transition: color var(--transition-fast);
+}
+
+.skill-icon-card span {
+    display: block;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.skill-icon-card:hover {
+    transform: translateY(-8px) scale(1.05); 
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.15),
+        0 0 20px var(--glow-color); 
+}
+
+/* --- 7. Projects Section (TIDAK BERUBAH) --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 4rem;
+}
+
+.project-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-medium); 
+    transform-style: preserve-3d;
+}
+
+.project-card img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* --- 8. Contact Section (TIDAK BERUBAH, dengan kursor WhatsApp) --- */
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.contact-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    width: 250px;
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative; 
+}
+
+.contact-link i {
+    font-size: 3.5rem; 
+    color: var(--accent-color); 
+}
+
+.contact-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    color: var(--accent-color);
+}
+
+/* Simulasi Ikon Kursor (Hanya untuk WhatsApp) */
+.cursor-target {
+    overflow: visible; 
+}
+
+.cursor-target::after {
+    font-family: 'Font Awesome 6 Free';
+    content: '\f245'; 
+    font-weight: 900; 
+    position: absolute;
+    font-size: 3.5rem;
+    color: var(--accent-color); 
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.6); 
+    z-index: 10;
+    opacity: 0.9;
+}
+
+.contact-link.whatsapp::after {
+    top: 5px;
+    right: 5px;
+    transform: rotate(40deg); 
+}
+
+/* --- 9. Animasi Keyframes & Footer (TIDAK BERUBAH) --- */
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 2.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.4rem;
+}
+
+/* --- 10. Responsivitas --- */
+@media (max-width: 992px) {
+    .home-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .text-area {
+        order: 2;
+        max-width: 100%; 
+    }
+    .photo-area {
+        order: 1;
+        padding-top: 0;
+    }
+
+    /* Responsivitas About Section */
+    .about-content-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    .about-photo-wrapper {
+        flex: 0 0 100%;
+        max-width: 300px;
+        margin: 0 auto 3rem;
+    }
+    .bio-text {
+        text-align: center;
+    }
+    
+    .skills-grid-2col {
+        grid-template-columns: 1fr; /* 1 kolom untuk tablet */
+        max-width: 300px;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .welcome-message {
+        font-size: 3.5rem;
+    }
+    .skills-grid-2col {
+        grid-template-columns: 1fr; 
+    }
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
+    }
+}
